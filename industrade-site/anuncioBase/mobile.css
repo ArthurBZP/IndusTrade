@@ -1,0 +1,140 @@
+/* ============================================================
+   Industrade — mobile.css
+   styles.css e header.css já são escritos mobile-first (as
+   regras sem @media são a base para telas pequenas). Este
+   arquivo concentra o refinamento específico da experiência
+   mobile: ajustes de toque, tipografia e espaçamento para
+   smartphones, além de um breakpoint extra para telas muito
+   estreitas (≤ 400px). Carregado por último, sobrepõe apenas
+   o necessário sem duplicar a base.
+   ============================================================ */
+
+/* ---------- Área de toque confortável em qualquer smartphone ---------- */
+.btn,
+.search-form button,
+.menu-toggle-label,
+.primary-nav ul li a {
+  min-height: 2.75rem;
+}
+
+.search-form input[type="search"] {
+  min-height: 2.75rem;
+}
+
+/* ---------- Ajustes gerais para viewport mobile ---------- */
+@media (max-width: 37.4375em) {
+  .hero {
+    padding-block: var(--space-lg) var(--space-md);
+    /* Fundo fixo custa caro em rolagem mobile; mantém scroll padrão */
+    background-attachment: scroll;
+  }
+
+  .hero-inner {
+    padding-inline: var(--space-sm);
+  }
+
+  .hero h1 {
+    max-width: none;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .section-inner {
+    padding-inline: var(--space-sm);
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .beneficios {
+    padding: var(--space-md);
+  }
+
+  .beneficio-numero {
+    font-size: 1.5rem;
+  }
+
+  .beneficio-numero strong {
+    font-size: 2rem;
+  }
+
+  /* ---- Página de anúncio ---- */
+  .anuncio-grid {
+    gap: var(--space-md);
+  }
+
+  .galeria-miniaturas {
+    gap: 0.375rem;
+  }
+
+  .miniatura {
+    width: 3.75rem;
+    height: 2.8125rem;
+  }
+
+  .specs-lista div {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .specs-lista dd {
+    text-align: left;
+  }
+
+  .anuncio-badges {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .anuncio-card-preco,
+  .vendedor-card {
+    padding: var(--space-sm);
+  }
+}
+
+/* ---------- Telas muito estreitas (celulares compactos) ---------- */
+@media (max-width: 25em) {
+  .logo-text {
+    font-size: 1.0625rem;
+  }
+
+  .header-inner {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+  }
+
+  .categoria-card,
+  .selo,
+  .depoimentos blockquote {
+    padding: var(--space-sm);
+  }
+
+  /* ---- Página de anúncio ---- */
+  .anuncio-preco {
+    font-size: 1.5rem;
+  }
+
+  .vendedor-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* ---------- Suporte a notch / safe-area em dispositivos móveis ---------- */
+@supports (padding: max(0px)) {
+  .header-inner {
+    padding-left: max(var(--space-md), env(safe-area-inset-left));
+    padding-right: max(var(--space-md), env(safe-area-inset-right));
+  }
+
+  .site-footer {
+    padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+  }
+}
