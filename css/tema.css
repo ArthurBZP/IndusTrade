@@ -1,0 +1,178 @@
+/* ============================================================
+   Industrade — tema.css
+   Botão de tema (claro/escuro) do cabeçalho + cores do tema escuro.
+
+   Como funciona: o js/tema.js grava a escolha no navegador e coloca
+   data-theme="dark" (ou "light") na tag <html>. Aqui, no tema escuro,
+   só trocamos os tokens de cor do styles.css; quase todo o site se
+   ajusta sozinho. Depois vêm os ajustes pontuais dos lugares em que
+   a troca automática deixaria algo ilegível.
+   ============================================================ */
+
+/* ---------- Botão de tema (cabeçalho) ---------- */
+.tema-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: var(--space-xs);
+  background-color: transparent;
+  color: var(--cor-preto);
+  border: 2px solid var(--cor-preto);
+  border-radius: var(--raio-borda);
+  font-weight: var(--peso-semibold);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tema-toggle:hover,
+.tema-toggle:focus-visible {
+  background-color: var(--cor-primaria);
+  color: #030302;
+}
+
+.tema-toggle svg { flex-shrink: 0; }
+
+/* Mostra a lua no tema claro (vai para o escuro) e o sol no escuro (volta ao claro) */
+.tema-toggle .icone-sol { display: none; }
+html[data-theme="dark"] .tema-toggle .icone-sol { display: block; }
+html[data-theme="dark"] .tema-toggle .icone-lua { display: none; }
+
+/* No menu mobile o botão ocupa a linha e mostra o texto; no desktop fica só o ícone */
+.nav-cta { flex-wrap: wrap; align-items: center; }
+.nav-cta .tema-toggle { flex: 1 0 100%; }
+
+@media (min-width: 60em) {
+  .nav-cta .tema-toggle { flex: none; }
+  .tema-toggle .tema-toggle-texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* ============================================================
+   TEMA ESCURO
+   ============================================================ */
+html[data-theme="dark"] {
+  color-scheme: dark;              /* selects, barras de rolagem e campos nativos escuros */
+
+  /* "preto" passa a ser a cor da tinta (clara) e "branco" a do papel (escuro) */
+  --cor-preto: #f1f1ec;
+  --cor-branco: #1b1b19;
+  --cor-texto-claro: #fdfdfd;      /* texto sobre os blocos que continuam pretos (rodapé etc.) */
+  --cor-superficie-alt: #121211;
+  --cor-cinza-claro: #33332f;
+  --border-color: #45453f;
+  --cor-texto-suave: #b1b1a9;
+  --cor-texto-medio: #d2d2cb;
+}
+
+/* ---------- Texto sobre amarelo continua preto ---------- */
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .skip-link,
+html[data-theme="dark"] .tag-troca,
+html[data-theme="dark"] .notif-badge,
+html[data-theme="dark"] .search-form button {
+  color: #030302;
+}
+html[data-theme="dark"] .notif-badge { border-color: #030302; }
+
+/* ---------- Blocos que são pretos nos dois temas ---------- */
+/* O herói mantém o cinza-escuro original (a engrenagem preta precisa aparecer sobre ele) */
+html[data-theme="dark"] .hero { background-color: #1f1f1d; border-bottom: 1px solid var(--border-color); }
+
+html[data-theme="dark"] .site-footer,
+html[data-theme="dark"] .beneficios {
+  background-color: #0c0c0b;
+  color: #fdfdfd;
+}
+html[data-theme="dark"] .site-footer { border-top: 1px solid var(--border-color); }
+html[data-theme="dark"] .beneficios { border: 1px solid var(--border-color); }
+
+/* Etiquetas e avatares: fundo preto com letra amarela (como no tema claro) */
+html[data-theme="dark"] .tag-venda,
+html[data-theme="dark"] .tag-vendido,
+html[data-theme="dark"] .vendedor-avatar,
+html[data-theme="dark"] .perfil-foto {
+  background-color: #030302;
+  color: var(--cor-primaria);
+}
+html[data-theme="dark"] .tag-venda,
+html[data-theme="dark"] .tag-vendido {
+  box-shadow: inset 0 0 0 1px var(--cor-primaria);
+}
+
+/* ---------- Botões ---------- */
+html[data-theme="dark"] .btn-outline-light {
+  color: #fdfdfd;
+  border-color: #fdfdfd;
+}
+html[data-theme="dark"] .btn-outline-light:hover,
+html[data-theme="dark"] .btn-outline-light:focus-visible {
+  background-color: #fdfdfd;
+  color: #030302;
+}
+
+html[data-theme="dark"] .btn-outline-preto { border-color: var(--cor-preto); }
+html[data-theme="dark"] .btn-outline-preto:hover,
+html[data-theme="dark"] .btn-outline-preto:focus-visible {
+  background-color: transparent;
+  color: var(--cor-preto);
+}
+
+html[data-theme="dark"] .btn-perigo {
+  color: #ff9a8f;
+  border-color: #ff9a8f;
+}
+html[data-theme="dark"] .btn-perigo:hover,
+html[data-theme="dark"] .btn-perigo:focus-visible {
+  background-color: #c62828;
+  border-color: #c62828;
+  color: #ffffff;
+}
+
+/* ---------- Seleções que usavam fundo preto + letra amarela ---------- */
+html[data-theme="dark"] .opcao input:checked + span,
+html[data-theme="dark"] .notif-sino:hover,
+html[data-theme="dark"] .notif-sino:focus-visible,
+html[data-theme="dark"] .notif-sino[aria-expanded="true"] {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: #030302;
+}
+
+/* ---------- Notificações / produtos vendidos ---------- */
+html[data-theme="dark"] .notif-item.nao-lida { background-color: rgba(247, 204, 18, 0.14); }
+html[data-theme="dark"] .notif-item.nao-lida .notif-ponto { background-color: var(--cor-primaria); }
+html[data-theme="dark"] .notif-painel { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); }
+html[data-theme="dark"] .item-vendido.nova { animation-name: vendido-destaque-escuro; }
+@keyframes vendido-destaque-escuro {
+  from { background-color: rgba(247, 204, 18, 0.3); }
+  to   { background-color: var(--cor-branco); }
+}
+
+/* ---------- Mensagens de sucesso/erro (cores definidas direto nas páginas) ---------- */
+html[data-theme="dark"] [style*="#c0392b"] { color: #ff9a8f !important; }
+html[data-theme="dark"] [style*="#1e8449"] { color: #7ddc9f !important; }
+
+/* ---------- QR Code do PIX: sempre preto no branco ---------- */
+html[data-theme="dark"] .pix-qr {
+  background: repeating-conic-gradient(#030302 0% 25%, #fdfdfd 0% 50%) 0 0 / 1.125rem 1.125rem;
+  border-color: #fdfdfd;
+}
+
+/* ---------- Engrenagens (logo e notas): os dentes são pretos no PNG ----------
+   Um contorno claro em volta mantém o desenho visível no fundo escuro. */
+html[data-theme="dark"] .logo-mark,
+html[data-theme="dark"] .engrenagem-item img {
+  filter: drop-shadow(0 0 0.5px #f1f1ec) drop-shadow(0 0 0.5px #f1f1ec) drop-shadow(0 0 1px #f1f1ec);
+}
+
+/* Botões "sem estilo" (abas, links discretos) herdam a cor do texto */
+:where(html[data-theme="dark"]) button { color: inherit; }

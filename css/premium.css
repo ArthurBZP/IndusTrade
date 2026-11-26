@@ -1,0 +1,467 @@
+/* ============================================================
+   Industrade — premium.css  (refinamento visual B2B/SaaS)
+   Camada SOMENTE de estilo: carregar POR ÚLTIMO em cada página.
+   Não altera HTML, IDs, classes nem scripts. Usa os seletores
+   que já existem e sobrescreve apenas aparência.
+   ============================================================ */
+
+/* ---------- 1. Tokens refinados (sobrescrevem styles.css) ---------- */
+:root {
+  --cor-superficie-alt: #f4f4f1;
+  --cor-cinza-claro: #e8e8e4;
+  --border-color: rgba(3, 3, 2, 0.12);        /* borda fina sutil */
+  --borda-forte: rgba(3, 3, 2, 0.85);
+  --cor-texto-suave: #5b5b55;
+  --vidro: rgba(253, 253, 253, 0.72);
+  --raio-borda: 8px;
+  --raio-card: 16px;
+  --raio-md: 12px;
+  --sombra-sm: 0 1px 2px rgba(3, 3, 2, 0.04), 0 2px 8px rgba(3, 3, 2, 0.04);
+  --sombra-md: 0 10px 30px -10px rgba(3, 3, 2, 0.18);
+  --sombra-lg: 0 24px 48px -16px rgba(3, 3, 2, 0.28);
+  --transicao: all 0.3s ease;
+}
+
+/* ---------- 2. Tipografia ---------- */
+body { letter-spacing: -0.005em; background-color: var(--cor-branco); }
+
+h1, h2, h3 { letter-spacing: -0.025em; line-height: 1.1; }
+
+.categorias h2, .vitrine h2, .confianca h2, .similares h2,
+.catalogo-titulo, .pagina-titulo, .anuncio-titulo {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.card-meta, .catalogo-sub, .pagina-sub, .anuncio-meta,
+.categoria-card p, .selo p, .vendedor-local { color: var(--cor-texto-suave); }
+
+:focus-visible { outline: 2px solid var(--cor-preto); outline-offset: 3px; box-shadow: 0 0 0 5px rgba(247, 204, 18, 0.65); }
+
+/* ---------- 3. Botões ---------- */
+.btn {
+  border-radius: 999px;
+  padding: 0.6rem 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: var(--transicao);
+}
+.btn:active { transform: translateY(1px) scale(0.98); }
+
+.btn-primary { box-shadow: 0 4px 14px -4px rgba(247, 204, 18, 0.7); }
+.btn-primary:hover, .btn-primary:focus-visible {
+  background-color: #ffdb4d; border-color: #ffdb4d;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(247, 204, 18, 0.85);
+}
+
+.btn-ghost { border-color: var(--border-color); }
+.btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--cor-preto); background: rgba(3,3,2,.04); }
+
+.btn-outline-preto { background-color: var(--cor-preto); color: var(--cor-branco); border-color: var(--cor-preto); }
+.btn-outline-preto:hover, .btn-outline-preto:focus-visible {
+  background-color: #1f1f1d; color: var(--cor-primaria);
+  transform: translateY(-2px); box-shadow: var(--sombra-md);
+}
+/* Botões dentro do hero escuro mantêm contraste */
+.hero .btn-outline-preto { background: rgba(253,253,253,.06); border-color: rgba(253,253,253,.35); backdrop-filter: blur(8px); }
+.hero .btn-outline-preto:hover, .hero .btn-outline-preto:focus-visible { background: var(--cor-branco); color: var(--cor-preto); }
+
+.btn-outline-light:hover, .btn-outline-light:focus-visible { transform: translateY(-2px); }
+.btn-lg { padding: 0.85rem 2rem; }
+.btn-sm { padding: 0.35rem 1rem; font-size: 0.9rem; }
+
+.btn-perigo { border-color: rgba(160, 20, 20, 0.35); }
+.btn-perigo:hover, .btn-perigo:focus-visible { transform: translateY(-1px); }
+
+/* ---------- 4. Header (vidro) ---------- */
+.site-header {
+  background-color: var(--vidro);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border-color);
+}
+.logo-text { font-weight: 800; letter-spacing: -0.04em; }
+.logo { transition: var(--transicao); }
+.logo:hover { opacity: 0.8; }
+
+.search-form {
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--cor-superficie-alt);
+  transition: var(--transicao);
+}
+.search-form:focus-within { border-color: var(--cor-preto); box-shadow: 0 0 0 4px rgba(247, 204, 18, 0.45); background: var(--cor-branco); }
+.search-form input[type="search"] { background: transparent; padding-inline: var(--space-md); }
+.search-form input[type="search"]:focus-visible { background: transparent; }
+.search-form button { transition: var(--transicao); }
+
+.menu-toggle-label { border-radius: 999px; transition: var(--transicao); }
+.menu-toggle-label:hover { background: rgba(3,3,2,.06); }
+
+.primary-nav ul li a { border-radius: var(--raio-borda); transition: var(--transicao); }
+
+/* ---------- 5. Hero ---------- */
+.hero { background-color: #1f1f1d; isolation: isolate; }   /* mantém o cinza escuro original para a engrenagem preta aparecer */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60% 80% at 85% 20%, rgba(247, 204, 18, 0.16), transparent 60%),
+    linear-gradient(180deg, rgba(3,3,2,0) 60%, rgba(3,3,2,.5));
+}
+.hero h1 { font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; }
+.hero-sub { color: rgba(253, 253, 253, 0.72); line-height: 1.6; }
+
+/* ---------- 6. Categorias ---------- */
+.categorias-grid { gap: var(--space-md); }
+.categoria-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  background: var(--cor-branco);
+  padding: var(--space-md) calc(var(--space-md) + 0.25rem);
+  transition: var(--transicao);
+}
+.categoria-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cor-preto);
+  box-shadow: var(--sombra-md);
+}
+.categoria-icone { padding: 0.5rem; width: 3rem; height: 3rem; border-radius: var(--raio-md); background: var(--cor-superficie-alt); transition: var(--transicao); }
+.categoria-card:hover .categoria-icone { background: var(--cor-primaria); }
+
+/* ---------- 7. Vitrine, catálogo e cards de anúncio ---------- */
+.vitrine, .catalogo, .similares { background-color: var(--cor-superficie-alt); }
+
+.cards-grid { gap: var(--space-md); }
+
+.card-maquina {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  box-shadow: var(--sombra-sm);
+  transition: var(--transicao);
+}
+.card-maquina:hover, .card-maquina:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(3, 3, 2, 0.28);
+  box-shadow: var(--sombra-lg);
+}
+.card-maquina img { transition: transform 0.6s ease; }
+.card-maquina:hover img { transform: scale(1.05); }
+/* mantém a imagem dentro do arredondamento do card */
+.card-maquina-link { overflow: hidden; border-radius: inherit; }
+.card-maquina-link:hover h3, .card-maquina-link:focus-visible h3 { text-decoration: none; }
+.card-maquina-link:focus-visible { outline-offset: -4px; }
+
+.card-conteudo { padding: var(--space-md) calc(var(--space-md) + 0.25rem) calc(var(--space-md) + 0.25rem); gap: 0.4rem; }
+.card-maquina h3 { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; }
+.card-preco { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.03em; padding-top: 0.35rem; }
+
+/* Tags / badges em pílula */
+.tag, .badge, .tag-vendido {
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0.75rem;
+  line-height: 1.3;
+  border: 1px solid transparent;
+}
+.tag-venda { background: var(--cor-preto); color: var(--cor-primaria); }
+.tag-troca { background: var(--cor-primaria); color: var(--cor-preto); }
+.tag-negociavel { background: transparent; border-color: var(--borda-forte); color: var(--cor-preto); }
+.badge { background: var(--cor-branco); border-color: var(--border-color); }
+.tag-vendido { margin-inline-start: 0.5rem; }
+
+/* ---------- 8. Filtros ---------- */
+.filtros {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  box-shadow: var(--sombra-sm);
+}
+.filtros summary { border-radius: var(--raio-card); transition: var(--transicao); }
+.filtros legend { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cor-texto-suave); }
+.filtro-check { border-radius: var(--raio-borda); padding-inline: 0.5rem; margin-inline: -0.5rem; transition: var(--transicao); }
+.filtro-check:hover { background: var(--cor-superficie-alt); }
+.filtro-check input { accent-color: var(--cor-preto); }
+
+.campo-filtro input, .campo-filtro select,
+.campo input, .campo select, .campo textarea {
+  border: 1px solid rgba(3, 3, 2, 0.2);
+  border-radius: var(--raio-md);
+  transition: var(--transicao);
+}
+.campo-filtro input:hover, .campo-filtro select:hover,
+.campo input:hover, .campo select:hover, .campo textarea:hover { border-color: rgba(3,3,2,.5); }
+.campo-filtro input:focus-visible, .campo-filtro select:focus-visible,
+.campo input:focus-visible, .campo select:focus-visible, .campo textarea:focus-visible {
+  outline: none; border-color: var(--cor-preto); box-shadow: 0 0 0 4px rgba(247, 204, 18, 0.55);
+}
+.filtros-limpar { width: 100%; }
+
+.resultados-contagem { font-size: 0.9375rem; color: var(--cor-texto-suave); font-weight: 600; }
+.sem-resultados { border-radius: var(--raio-card); border: 1px dashed rgba(3,3,2,.25); }
+
+/* ---------- 9. Confiança / depoimentos ---------- */
+.selo { border-radius: var(--raio-md); border-inline-start-width: 3px; }
+.beneficios {
+  border-radius: var(--raio-card);
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgba(247,204,18,.14), transparent 60%),
+    var(--cor-preto);
+  border: 1px solid rgba(253,253,253,.08);
+}
+.beneficio-numero strong { font-weight: 800; letter-spacing: -0.04em; }
+.depoimentos blockquote {
+  border-radius: var(--raio-card);
+  background: var(--cor-branco);
+  box-shadow: var(--sombra-sm);
+  transition: var(--transicao);
+}
+.depoimentos blockquote:hover { transform: translateY(-3px); box-shadow: var(--sombra-md); }
+
+/* ---------- 10. Tela de anúncio ---------- */
+.trilha-nav a { transition: var(--transicao); }
+.trilha-nav a:hover { text-decoration-color: var(--cor-primaria); text-underline-offset: 4px; }
+
+.galeria-principal {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  box-shadow: var(--sombra-md);
+}
+.miniatura {
+  border: 2px solid transparent;
+  border-radius: var(--raio-md);
+  opacity: 0.65;
+  transition: var(--transicao);
+}
+.miniatura:hover { opacity: 1; transform: translateY(-2px); }
+#galeria-1:checked ~ .galeria-miniaturas label[for="galeria-1"],
+#galeria-2:checked ~ .galeria-miniaturas label[for="galeria-2"],
+#galeria-3:checked ~ .galeria-miniaturas label[for="galeria-3"] {
+  opacity: 1; border-color: var(--cor-preto); box-shadow: 0 0 0 3px var(--cor-primaria);
+}
+
+.anuncio-titulo { line-height: 1.05; }
+
+.anuncio-descricao h2, .anuncio-specs h2 { font-size: 1.125rem; font-weight: 700; }
+.anuncio-descricao p { line-height: 1.7; color: #3a3a36; }
+
+/* Especificações em "painel" */
+.specs-lista {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  padding: 0.25rem var(--space-md);
+  background: var(--cor-branco);
+}
+.specs-lista div { padding-block: 0.85rem; border-bottom: 1px solid var(--border-color); }
+.specs-lista div:last-child { border-bottom: none; }
+.specs-lista dt { font-size: 0.875rem; }
+.specs-lista dd { font-weight: 600; }
+
+/* Cartões laterais */
+.anuncio-card-preco, .vendedor-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  background: var(--cor-branco);
+  box-shadow: var(--sombra-md);
+  padding: var(--space-md) calc(var(--space-md) + 0.25rem);
+}
+.anuncio-preco { font-size: 2.125rem; font-weight: 800; letter-spacing: -0.04em; }
+.anuncio-cta { padding-block: 0.85rem; font-size: 1.0625rem; }
+.vendedor-avatar { box-shadow: 0 0 0 3px var(--cor-primaria); }
+.vendedor-nome { font-weight: 700; }
+.vendedor-info-lista li::before { background: var(--cor-primaria); box-shadow: 0 0 0 2px rgba(3,3,2,.9); }
+
+/* ---------- 11. Páginas internas: formulários / cards ---------- */
+.pagina-interna { background-color: var(--cor-superficie-alt); }
+
+.card-form {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  box-shadow: var(--sombra-sm);
+  background: var(--cor-branco);
+}
+.card-form h2, .card-form legend { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.02em; }
+.campo label, .rotulo { font-size: 0.875rem; }
+.campo-dica, .opcional { color: var(--cor-texto-suave); }
+
+/* Opções em cartão (PIX / Cartão / Boleto etc.) */
+.opcao span {
+  border: 1px solid rgba(3,3,2,.2);
+  border-radius: var(--raio-md);
+  transition: var(--transicao);
+}
+.opcao:hover span { border-color: var(--cor-preto); transform: translateY(-2px); box-shadow: var(--sombra-sm); }
+.opcao input:checked + span {
+  background: var(--cor-preto); color: var(--cor-primaria);
+  border-color: var(--cor-preto); box-shadow: 0 0 0 3px var(--cor-primaria);
+}
+.opcao input:focus-visible + span { outline: none; box-shadow: 0 0 0 4px rgba(247,204,18,.7); }
+
+.imagem-linha { border-radius: var(--raio-md); border-color: rgba(3,3,2,.2); }
+.link-discreto { transition: var(--transicao); }
+
+/* ---------- 12. Pagamento / resumo do pedido ---------- */
+.resumo-compra {
+  padding: var(--space-md);
+  border-radius: var(--raio-md);
+  background: var(--cor-superficie-alt);
+  border: 1px solid var(--border-color);
+}
+.resumo-compra > strong {
+  font-size: 1.75rem; font-weight: 800; letter-spacing: -0.04em; white-space: nowrap;
+}
+.pix-caixa { border-radius: var(--raio-md); border-color: rgba(3,3,2,.25); background: var(--cor-superficie-alt); }
+.pix-qr { border-radius: var(--raio-md); border-width: 6px; box-shadow: var(--sombra-sm); }
+
+/* ---------- 13. Pedidos / Minhas compras ---------- */
+.lista-produtos, .lista-pedidos { gap: var(--space-sm); }
+
+.item-produto, .item-pedido {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  padding: var(--space-md) calc(var(--space-md) + 0.25rem);
+  box-shadow: var(--sombra-sm);
+  transition: var(--transicao);
+}
+.item-produto:hover, .item-pedido:hover {
+  transform: translateY(-3px);
+  border-color: rgba(3,3,2,.28);
+  box-shadow: var(--sombra-md);
+}
+.item-pedido { position: relative; }
+.item-pedido::before {   /* trilho de status (decorativo) */
+  content: ""; position: absolute; left: 0; top: 1.25rem; bottom: 1.25rem; width: 4px;
+  border-radius: 0 4px 4px 0; background: var(--cor-primaria);
+}
+.item-produto h3, .item-pedido h3 { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.02em; }
+.pedido-dados dt, .vendido-dados dt, .dados-lista dt {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cor-texto-suave);
+}
+.pedido-dados dd, .vendido-dados dd { font-weight: 600; }
+
+/* ---------- 14. Perfil ---------- */
+.perfil-topo { gap: var(--space-md); }
+.perfil-foto {
+  border: 3px solid var(--cor-primaria);
+  box-shadow: 0 0 0 4px var(--cor-branco), var(--sombra-md);
+}
+.perfil-nome { font-size: 1.625rem; font-weight: 800; letter-spacing: -0.035em; }
+.perfil-cnpj { color: var(--cor-texto-suave); font-size: 0.9375rem; }
+.perfil-acoes { align-items: center; }
+
+/* Abas em "segmented control" */
+.abas {
+  display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--cor-superficie-alt);
+  margin-block-end: var(--space-md);
+}
+.abas::-webkit-scrollbar { display: none; }
+.aba {
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  min-height: 2.5rem;
+  margin: 0;
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: var(--transicao);
+}
+.aba:hover { color: var(--cor-preto); background: rgba(3,3,2,.05); }
+.aba[aria-selected="true"] {
+  background: var(--cor-preto);
+  color: var(--cor-primaria);
+  box-shadow: 0 6px 16px -6px rgba(3,3,2,.5);
+}
+.aba:focus-visible { outline-offset: 1px; }
+
+.dados-lista div { padding-block: 0.85rem; border-bottom-color: var(--cor-cinza-claro); }
+.dados-lista div:last-child { border-bottom: none; }
+.dados-lista dd { font-weight: 600; }
+@media (min-width: 37.5em) { .dados-lista div { align-items: baseline; } }
+
+.vazio { border-radius: var(--raio-md); border-color: rgba(3,3,2,.2); background: var(--cor-superficie-alt); text-align: center; padding: var(--space-lg) var(--space-md); }
+
+/* ---------- 15. Notificações (sino + painel + feed) ---------- */
+.notif-sino {
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  width: 2.75rem; height: 2.75rem;
+  transition: var(--transicao);
+}
+.notif-sino:hover, .notif-sino:focus-visible, .notif-sino[aria-expanded="true"] {
+  background: var(--cor-preto); color: var(--cor-primaria); border-color: var(--cor-preto); transform: translateY(-2px);
+}
+.notif-badge { border: 2px solid var(--cor-branco); box-shadow: 0 0 0 1px var(--cor-preto); }
+
+.notif-painel {
+  border: 1px solid var(--border-color);
+  border-radius: var(--raio-card);
+  background: rgba(253,253,253,.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--sombra-lg);
+  overflow: hidden;
+}
+.notif-cabecalho { border-bottom: 1px solid var(--border-color); background: transparent; padding: var(--space-sm) var(--space-md); }
+.notif-cabecalho h2 { font-size: 0.9375rem; font-weight: 700; }
+.notif-link { transition: var(--transicao); border-radius: 6px; }
+.notif-link:hover { background: rgba(247,204,18,.35); }
+.notif-item { padding: var(--space-sm) var(--space-md); transition: var(--transicao); border-bottom-color: var(--cor-cinza-claro); }
+.notif-item:hover { background: var(--cor-superficie-alt); }
+.notif-item.nao-lida { background: #fff8d0; box-shadow: inset 3px 0 0 var(--cor-primaria); }
+.notif-item.nao-lida:hover { background: #fff3b0; }
+.notif-item.nao-lida .notif-ponto { background: var(--cor-preto); box-shadow: 0 0 0 3px rgba(247,204,18,.9); }
+.notif-hora { color: var(--cor-texto-suave); }
+.notif-rodape { border-top: 1px solid var(--border-color); background: var(--cor-superficie-alt); padding: var(--space-xs) var(--space-md); }
+
+/* Feed de vendidos */
+.item-vendido { border-radius: var(--raio-card); }
+.item-vendido .vendido-dados { gap: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--cor-cinza-claro); margin-top: var(--space-sm); }
+.tag-vendido { background: var(--cor-preto); color: var(--cor-primaria); vertical-align: middle; }
+.vendidos-resumo { color: var(--cor-texto-suave); }
+.item-vendido.nova { animation: vendido-destaque 2.4s ease-out 1; }
+
+/* ---------- 16. Rodapé ---------- */
+.site-footer {
+  background:
+    radial-gradient(50% 80% at 100% 0%, rgba(247,204,18,.08), transparent 60%),
+    var(--cor-preto);
+}
+.footer-logo { font-weight: 800; letter-spacing: -0.04em; }
+.footer-coluna h3 { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.footer-coluna p, .footer-coluna address, .footer-coluna a { color: rgba(253,253,253,.68); }
+.footer-coluna a { transition: var(--transicao); }
+.footer-coluna a:hover, .footer-coluna a:focus-visible { color: var(--cor-primaria); }
+.copyright { border-top: 1px solid rgba(253,253,253,.1); padding-top: var(--space-md); color: rgba(253,253,253,.45); }
+
+/* ---------- 17. Ajustes responsivos ---------- */
+@media (max-width: 37.4375em) {
+  .abas { display: flex; flex-wrap: wrap; border-radius: var(--raio-md); overflow: visible; }
+  .aba { flex: 1 1 auto; padding-inline: 0.75rem; font-size: 0.875rem; white-space: normal; border-radius: var(--raio-borda); }
+  /* hero: imagem passa para a área reservada abaixo do texto (antes sobrepunha o título) */
+  .hero { background-position: center bottom var(--space-md); }
+  .card-maquina:hover { transform: none; }
+  .resumo-compra { flex-direction: column; align-items: flex-start; }
+  .card-conteudo { padding: var(--space-md); }
+}
+
+@media (min-width: 60em) {
+  .primary-nav ul li a:hover, .primary-nav ul li a:focus-visible { text-decoration-color: var(--cor-primaria); }
+}
+
+/* ---------- 18. Acessibilidade: reduz movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card-maquina:hover, .categoria-card:hover, .item-produto:hover, .item-pedido:hover,
+  .depoimentos blockquote:hover, .btn:hover, .opcao:hover span { transform: none; }
+  .card-maquina:hover img { transform: none; }
+}

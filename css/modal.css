@@ -1,0 +1,171 @@
+/* ============================================================
+   Industrade — modal.css
+   Pop-ups (elemento <dialog>) e o seletor de estrelas da avaliação.
+   Usa os tokens de styles.css, então acompanha o tema claro/escuro.
+   ============================================================ */
+
+/* ---------- Pop-up ---------- */
+.modal {
+  width: min(28rem, calc(100vw - 2rem));
+  margin: auto;                      /* o reset do site zera a margem; isto centraliza de novo */
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+  background-color: var(--cor-branco);
+  color: var(--cor-preto);
+  border: 2px solid var(--cor-preto);
+  border-radius: var(--raio-borda);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.modal::backdrop { background-color: rgba(3, 3, 2, 0.65); }
+
+.modal-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-block-end: var(--space-sm);
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  color: #030302;
+}
+
+.modal h2 {
+  font-size: 1.375rem;
+  margin-block-end: var(--space-xs);
+}
+
+.modal p { color: var(--cor-texto-medio); }
+
+.modal-telefone {
+  display: block;
+  margin-block: var(--space-sm);
+  font-size: 1.75rem;
+  font-weight: var(--peso-bold);
+  color: var(--cor-preto);
+  letter-spacing: 0.02em;
+}
+
+.modal-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-block-start: var(--space-md);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: none;
+  border: none;
+  color: var(--cor-preto);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--raio-borda);
+}
+
+@media (min-width: 37.5em) {
+  .modal { padding: var(--space-lg); }
+  .modal-acoes { flex-direction: row; justify-content: center; }
+}
+
+/* ---------- Avaliação do vendedor ---------- */
+.avaliar-caixa {
+  padding: var(--space-md);
+  margin-block-end: var(--space-md);
+  border: 2px solid var(--cor-primaria);
+  border-radius: var(--raio-borda);
+  background-color: var(--cor-superficie-alt);
+  scroll-margin-top: 6rem;          /* o cabeçalho fixo não cobre o formulário ao chegar por #avaliar */
+}
+
+.avaliar-caixa h2 { margin-block-end: 0.25rem; }
+
+.avaliar-caixa .campo { margin-block-start: var(--space-sm); }
+
+/* Estrelas: 5 radios. No HTML elas vêm da 5 para a 1 e o CSS inverte a ordem na
+   tela; assim "a marcada e todas as seguintes no HTML" = da 1ª estrela até a escolhida. */
+.estrelas {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 0.125rem;
+  border: none;
+  padding: 0;
+}
+
+.estrelas input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.estrelas label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--cor-cinza-claro);
+  -webkit-text-stroke: 1px var(--cor-texto-suave);
+  cursor: pointer;
+  border-radius: var(--raio-borda);
+  transition: color 0.1s ease, transform 0.1s ease;
+}
+
+.estrelas input:checked ~ label,
+.estrelas label:hover,
+.estrelas label:hover ~ label {
+  color: var(--cor-primaria);
+  -webkit-text-stroke: 1px #8a6f00;
+}
+
+.estrelas label:hover { transform: scale(1.12); }
+
+.estrelas input:focus-visible + label {
+  outline: 3px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.estrelas-legenda {
+  display: block;
+  min-height: 1.5rem;
+  font-weight: var(--peso-semibold);
+}
+
+/* Estrelas só de leitura (nota já dada, em "Minhas compras") */
+.estrelas-nota {
+  color: var(--cor-primaria);
+  -webkit-text-stroke: 0.5px #8a6f00;
+  font-size: 1.125rem;
+  letter-spacing: 0.1em;
+}
+.estrelas-nota .vazia { color: var(--cor-cinza-claro); -webkit-text-stroke: 0.5px var(--cor-texto-suave); }
+
+/* ---------- Minhas compras ---------- */
+.pedido-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs);
+}
+
+.pedido-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 37.5em) {
+  .lista-pedidos .pedido-dados { grid-template-columns: repeat(4, 1fr); }
+}

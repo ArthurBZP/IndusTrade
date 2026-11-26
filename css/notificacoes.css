@@ -1,0 +1,198 @@
+/* ============================================================
+   Industrade — notificacoes.css
+   Estilos NOVOS e isolados (não altera nenhuma regra existente):
+   - Sino de notificações + painel suspenso (perfil.html)
+   - Aba "Produtos Vendidos" (perfil.html)
+   Reutiliza os tokens de styles.css (--cor-*, --space-*, --raio-borda).
+   ============================================================ */
+
+/* ---------- Sino de notificações ---------- */
+.notif-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.notif-sino {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  background-color: var(--cor-branco);
+  color: var(--cor-preto);
+  border: 2px solid var(--cor-preto);
+  border-radius: var(--raio-borda);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.notif-sino:hover,
+.notif-sino:focus-visible,
+.notif-sino[aria-expanded="true"] {
+  background-color: var(--cor-preto);
+  color: var(--cor-primaria);
+}
+
+.notif-sino:focus-visible {
+  outline: 3px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding-inline: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-primaria);
+  color: var(--cor-preto);
+  border: 2px solid var(--cor-preto);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: var(--peso-bold);
+  line-height: 1;
+}
+
+.notif-badge[hidden] { display: none; }
+
+/* ---------- Painel suspenso ---------- */
+.notif-painel {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  right: 0;
+  z-index: 50;
+  width: min(22rem, calc(100vw - 2rem));
+  max-height: 26rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-branco);
+  border: 2px solid var(--cor-preto);
+  border-radius: var(--raio-borda);
+  box-shadow: 0 8px 24px rgba(3, 3, 2, 0.18);
+}
+
+.notif-painel[hidden] { display: none; }
+
+.notif-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 2px solid var(--cor-preto);
+  background-color: var(--cor-superficie-alt);
+}
+
+.notif-cabecalho h2 { font-size: 1rem; }
+
+.notif-link {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  color: var(--cor-preto);
+  text-decoration: underline;
+  text-decoration-color: var(--cor-primaria);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.notif-link:focus-visible {
+  outline: 3px solid var(--cor-primaria);
+}
+
+.notif-lista {
+  list-style: none;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.notif-item {
+  display: flex;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border-bottom: 1px solid var(--cor-cinza-claro);
+}
+
+.notif-item:last-child { border-bottom: none; }
+
+.notif-item.nao-lida { background-color: #fff9d6; }
+
+.notif-ponto {
+  flex-shrink: 0;
+  width: 0.625rem;
+  height: 0.625rem;
+  margin-top: 0.35rem;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.notif-item.nao-lida .notif-ponto { background-color: var(--cor-preto); }
+
+.notif-texto { font-size: 0.875rem; }
+.notif-texto strong { font-weight: var(--peso-semibold); }
+.notif-hora { display: block; margin-top: 0.125rem; font-size: 0.75rem; color: var(--cor-texto-suave); }
+
+.notif-vazio {
+  padding: var(--space-md);
+  text-align: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.875rem;
+}
+
+.notif-vazio[hidden] { display: none; }
+
+.notif-rodape {
+  padding: var(--space-xs) var(--space-sm);
+  border-top: 1px solid var(--cor-cinza-claro);
+  text-align: center;
+}
+
+/* ---------- Aba Produtos Vendidos ---------- */
+.item-vendido { align-items: stretch; }
+.item-vendido .vendido-dados {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+.item-vendido .vendido-dados dt { color: var(--cor-texto-suave); font-size: 0.8125rem; }
+.item-vendido .vendido-dados dd { font-weight: var(--peso-semibold); }
+
+.tag-vendido {
+  display: inline-block;
+  padding: 0.125rem var(--space-xs);
+  margin-inline-start: var(--space-xs);
+  background-color: var(--cor-preto);
+  color: var(--cor-primaria);
+  border-radius: var(--raio-borda);
+  font-size: 0.75rem;
+  font-weight: var(--peso-bold);
+  vertical-align: middle;
+}
+
+.item-vendido.nova { animation: vendido-destaque 2.4s ease-out 1; }
+
+@keyframes vendido-destaque {
+  from { background-color: #fff3a8; }
+  to   { background-color: var(--cor-branco); }
+}
+
+.vendidos-resumo { margin-bottom: var(--space-sm); color: var(--cor-texto-suave); }
+
+@media (min-width: 37.5em) {
+  .item-vendido .vendido-dados { grid-template-columns: repeat(3, 1fr); }
+  .item-vendido { flex-direction: column; align-items: stretch; justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item-vendido.nova { animation: none; }
+}
